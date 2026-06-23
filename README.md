@@ -5,7 +5,7 @@ indicators, and simple trading strategies. It fetches market data, charts it
 with TradingView's Lightweight Charts, computes indicators, and backtests
 toy strategies against a Buy & Hold baseline — all in a native window.
 
-> ⚠️ **This is an educational analysis tool, not financial advice.** Nothing here
+> **This is an educational analysis tool, not financial advice.** Nothing here
 > predicts future prices. Technical indicators and backtests describe *historical,
 > hypothetical* behavior only. **Past performance does not indicate future results.**
 
