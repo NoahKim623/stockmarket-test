@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock Analysis &amp; Backtesting Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- TradingView Lightweight Charts (vendored, offline) -->
+  <script src="vendor/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">▦</span>
+      <span class="title">Stock Analysis &amp; Backtesting</span>
+      <span class="edu-badge" title="This is an educational tool">EDUCATIONAL</span>
+    </div>
+    <div id="disclaimer-short" class="disclaimer-pill">Educational analysis tool — not financial advice.</div>
+  </header>
+
+  <section class="controls">
+    <div class="control-group">
+      <input id="ticker" class="ticker-input" type="text" placeholder="Ticker, e.g. AAPL"
+             autocomplete="off" spellcheck="false" maxlength="16" />
+      <button id="load-btn" class="btn primary">Load</button>
+    </div>
+    <div id="timeframes" class="segmented" role="group" aria-label="Timeframe"></div>
+    <div class="control-group overlays">
+      <label class="toggle"><input type="checkbox" id="toggle-sma" /> <span id="tl-sma">SMA</span></label>
+      <label class="toggle"><input type="checkbox" id="toggle-ema" /> <span id="tl-ema">EMA</span></label>
+      <label class="toggle"><input type="checkbox" id="toggle-bb" /> <span id="tl-bb">Bollinger</span></label>
+      <label class="toggle"><input type="checkbox" id="toggle-volume" checked /> <span>Volume</span></label>
+    </div>
+    <div class="control-group right">
+      <button id="refresh-btn" class="btn ghost" title="Force a fresh fetch from the data source">↻ Refresh</button>
+    </div>
+  </section>
+
+  <section class="statusline">
+    <span id="status-symbol" class="status-symbol">—</span>
+    <span id="status-asof" class="status-asof"></span>
+    <span id="status-source" class="status-source"></span>
+    <span id="status-stale" class="badge stale hidden" title="Showing cached data; a live refresh failed">STALE</span>
+  </section>
+
+  <div class="workspace">
+    <div class="charts">
+      <div class="panel panel-price">
+        <div id="price-legend" class="panel-label legend"></div>
+        <div id="chart-price" class="chart"></div>
+        <div id="chart-overlay" class="chart-overlay hidden">
+          <div class="spinner"></div><span id="overlay-text">Loading…</span>
+        </div>
+      </div>
+      <div class="panel panel-rsi">
+        <div id="label-rsi" class="panel-label">RSI</div>
+        <div id="chart-rsi" class="chart"></div>
+      </div>
+      <div class="panel panel-macd">
+        <div id="label-macd" class="panel-label">MACD</div>
+        <div id="chart-macd" class="chart"></div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <section class="card">
+        <h3 class="card-title">Summary</h3>
+        <div id="summary-grid" class="summary-grid">
+          <div class="summary-empty">Load a ticker to see stats.</div>
+        </div>
+      </section>
+
+      <section class="card bt-card">
+        <h3 class="card-title">Backtest <span class="hist-tag">historical / descriptive</span></h3>
+        <div class="bt-form">
+          <label class="bt-field">
+            <span>Strategy</span>
+            <select id="bt-strategy" class="bt-input"></select>
+          </label>
+          <div id="bt-desc" class="bt-desc"></div>
+          <div id="bt-params" class="bt-params"></div>
+          <div class="bt-costs">
+            <label class="bt-field"><span>Starting cash ($)</span>
+              <input id="bt-cash" class="bt-input" type="number" min="1" step="100" /></label>
+            <label class="bt-field"><span>Commission (%)</span>
+              <input id="bt-commission" class="bt-input" type="number" min="0" step="0.01" /></label>
+            <label class="bt-field"><span>Slippage (%)</span>
+              <input id="bt-slippage" class="bt-input" type="number" min="0" step="0.01" /></label>
+          </div>
+          <button id="bt-run" class="btn primary bt-run">Run backtest</button>
+        </div>
+        <div id="bt-results" class="bt-results"></div>
+        <p id="bt-disclaimer" class="bt-disclaimer"></p>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <span id="disclaimer-long"></span>
+  </footer>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
