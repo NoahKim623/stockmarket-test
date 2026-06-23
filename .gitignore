@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual env
+.venv/
+venv/
+
+# PyInstaller / Nuitka build output
+build/
+dist/
+*.build/
+*.dist/
+*.onefile-build/
+
+# Local data (the SQLite cache lives in %LOCALAPPDATA%\StockDashboard, not here,
+# but ignore any stray local copies just in case)
+*.db
+*.sqlite3
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
